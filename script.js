@@ -8,39 +8,39 @@ const WorkoutTracker = () => {
     'Push Workout': [
       { name: 'Treadmill', image: './images/treadmill.png', category: 'Cardio' },
       { name: 'Arm Circles', image: './images/arm-circles.png', category: 'Warmup' },
-      { name: 'World Greatest Stretch', image: './images/world-greatest-stretch.png', category: 'Mobility' },
-      { name: '90/90', image: './images/90-90.png', category: 'Mobility' },
+      { name: 'World Greatest Stretch', image: './images/world-greatest-stretch.png', category: 'Warmup' },
+      { name: '90/90', image: './images/90-90.png', category: 'Warmup' },
       { name: 'Cable Flys', image: './images/cable-flys.gif', category: 'Chest' },
       { name: 'Cable Triceps Pulldowns', image: './images/cable-triceps-pulldowns.png', category: 'Triceps' },
       { name: 'Dumbbell Lateral Raises Sitting', image: './images/dumbbell-lateral-raises.gif', category: 'Shoulders' },
-      { name: 'Hammerschmitt', image: './images/machine-hack-squats.png', category: 'Legs' },
-      { name: 'Machine Leg Extension (nach oben drücken)', image: './images/machine-leg-extension.png', category: 'Legs' },
-      { name: 'Bench Press', image: './images/barbell-bench-press.png', category: 'Chest' }
+      { name: 'Machine Hack Squats', image: './images/machine-hack-squats.png', category: 'Legs' },
+      { name: 'Machine Leg Extension', image: './images/machine-leg-extension.png', category: 'Legs' },
+      { name: 'Barbell Bench Press', image: './images/barbell-bench-press.png', category: 'Chest' }
     ],
     'Pull A': [
       { name: 'Treadmill', image: './images/treadmill.png', category: 'Cardio' },
       { name: 'Arm Circles', image: './images/arm-circles.png', category: 'Warmup' },
-      { name: 'Quadruped T Spine Mobilization (rücken hoch und runter)', image: './images/quadruped-t-spine.png', category: 'Mobility' },
-      { name: 'Ankle Mobilization', image: './images/ankle-mobilization.png', category: 'Mobility' },
+      { name: 'Quadruped T Spine Mobilization', image: './images/quadruped-t-spine.png', category: 'Warmup' },
+      { name: 'Ankle Mobilization', image: './images/ankle-mobilization.png', category: 'Warmup' },
       { name: 'Resistance Band Pull-ups', image: './images/resistance-band-pullups.png', category: 'Back' },
       { name: 'Cable Row Wide Sitting', image: './images/cable-row-wide.png', category: 'Back' },
-      { name: 'Machine Leg Curls (beine nach unten drücken)', image: './images/machine-leg-curls.png', category: 'Legs' },
-      { name: 'Dumbbell Bicep Curls (bizeps mit hanteln im sitzen)', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
-      { name: 'Machine Adduktoren (kenos lieblingsübung)', image: './images/machine-hip-adduction.png', category: 'Legs' },
-      { name: 'Crunches (mit ball)', image: './images/crunches.png', category: 'Core' }
+      { name: 'Machine Leg Curls', image: './images/machine-leg-curls.png', category: 'Legs' },
+      { name: 'Dumbbell Bicep Curls Incline', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
+      { name: 'Machine Hip Adduction', image: './images/machine-hip-adduction.png', category: 'Legs' },
+      { name: 'Crunches', image: './images/crunches.png', category: 'Core' }
     ],
     'Pull B': [
       { name: 'Treadmill', image: './images/treadmill.png', category: 'Cardio' },
       { name: 'Arm Circles', image: './images/arm-circles.png', category: 'Warmup' },
-      { name: 'Quadruped T Spine Mobilization', image: './images/quadruped-t-spine.png', category: 'Mobility' },
-      { name: 'Ankle Mobilization', image: './images/ankle-mobilization.png', category: 'Mobility' },
-      { name: 'T-Bar Row', image: './images/t-bar-row.png', category: 'Back' },
+      { name: 'Quadruped T Spine Mobilization', image: './images/quadruped-t-spine.png', category: 'Warmup' },
+      { name: 'Ankle Mobilization', image: './images/ankle-mobilization.png', category: 'Warmup' },
       { name: 'Resistance Band Pull-ups', image: './images/resistance-band-pullups.png', category: 'Back' },
-      { name: 'HumanSport Lat Pulley (in dem anderen Raum)', image: './images/lat-pulley.png', category: 'Back' },
+      { name: 'HumanSport Lat Pulley', image: './images/lat-pulley.png', category: 'Back' },
       { name: 'Cable Face Pulls', image: './images/cable-face-pulls.png', category: 'Shoulders' },
-      { name: 'Dumbbell Bicep Curls (bizeps mit hanteln im sitzen)', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
+      { name: 'Dumbbell Bicep Curls Incline', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
       { name: 'Machine Leg Curls (beine nach unten drücken)', image: './images/machine-leg-curls.png', category: 'Legs' },
       { name: 'Machine Adduktoren (kenos lieblingsübung)', image: './images/machine-hip-adduction.png', category: 'Legs' },
+      { name: 'T-Bar Row', image: './images/t-bar-row.png', category: 'Back' }
     ]
   };
 
@@ -48,6 +48,7 @@ const WorkoutTracker = () => {
   const [currentWorkout, setCurrentWorkout] = useState('Push Workout');
   const [workoutHistory, setWorkoutHistory] = useState({});
   const [exerciseWeights, setExerciseWeights] = useState({});
+  const [completedSets, setCompletedSets] = useState({});
   const [viewMode, setViewMode] = useState('current'); // 'current', 'history', 'progress'
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedExercise, setSelectedExercise] = useState('');
@@ -88,6 +89,15 @@ const WorkoutTracker = () => {
       [exerciseName]: value
     });
   };
+  
+  // Handle set completion checkboxes
+  const handleSetToggle = (exerciseName, setNumber) => {
+    const exerciseKey = `${exerciseName}-set${setNumber}`;
+    setCompletedSets(prevSets => ({
+      ...prevSets,
+      [exerciseKey]: !prevSets[exerciseKey]
+    }));
+  };
 
   // Save current workout
   const saveWorkout = () => {
@@ -118,6 +128,7 @@ const WorkoutTracker = () => {
     
     // Clear inputs after saving
     setExerciseWeights({});
+    setCompletedSets({});
     setStatusMessage('Workout saved successfully!');
     setTimeout(() => setStatusMessage(''), 2000);
     
@@ -353,6 +364,7 @@ const WorkoutTracker = () => {
               onClick: () => {
                 setViewMode('current');
                 setExerciseWeights({});
+                setCompletedSets({});
               },
               className: `px-3 py-2 rounded-l-lg ${viewMode === 'current' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`
             },
@@ -431,6 +443,8 @@ const WorkoutTracker = () => {
               ...initialWorkouts[currentWorkout].map(exercise => {
                 const prevWeight = getPreviousWeight(exercise.name);
                 const exerciseImage = getExerciseImage(exercise.name, currentWorkout);
+                const isCardio = exercise.category === 'Cardio';
+                const isWarmup = exercise.category === 'Warmup';
                 
                 return React.createElement(
                   'div',
@@ -449,7 +463,10 @@ const WorkoutTracker = () => {
                         [
                           React.createElement(
                             'label',
-                            { className: "block font-medium text-lg", key: `${exercise.name}-label` },
+                            { 
+                              className: `block font-medium text-lg ${isCardio ? 'text-green-700' : isWarmup ? 'text-blue-700' : ''}`, 
+                              key: `${exercise.name}-label` 
+                            },
                             exercise.name
                           ),
                           React.createElement(
@@ -473,7 +490,7 @@ const WorkoutTracker = () => {
                             React.createElement('img', {
                               src: exerciseImage,
                               alt: exercise.name,
-                              className: "w-full h-32 object-cover rounded border border-gray-200",
+                              className: "w-full h-auto max-h-48 object-contain rounded border border-gray-200",
                               onError: (e) => {
                                 // If image fails to load, hide the image completely
                                 e.target.style.display = 'none';
@@ -484,32 +501,161 @@ const WorkoutTracker = () => {
                             })
                           ),
                           
-                          // Weight input container
+                          // Weight input and sets container
                           React.createElement(
                             'div',
                             { className: "w-full sm:w-2/3", key: `${exercise.name}-input-container` },
-                            React.createElement(
-                              'div',
-                              { className: "flex items-center mt-1 mb-2", key: `${exercise.name}-input-group` },
-                              [
-                                React.createElement('input', {
-                                  type: "number",
-                                  value: exerciseWeights[exercise.name] || '',
-                                  onChange: (e) => handleWeightChange(exercise.name, e.target.value),
-                                  placeholder: "Weight (kg)",
-                                  className: "flex-grow p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500",
-                                  key: `${exercise.name}-input`
-                                }),
-                                prevWeight && React.createElement(
-                                  'span',
-                                  { 
-                                    className: "ml-2 text-sm text-gray-500 whitespace-nowrap", 
-                                    key: `${exercise.name}-prev-weight` 
-                                  },
-                                  `Last: ${prevWeight} kg`
-                                )
-                              ]
-                            )
+                            [
+                              // Weight input - only for non-cardio and non-warmup exercises
+                              !isCardio && !isWarmup && React.createElement(
+                                'div',
+                                { className: "flex items-center mt-1 mb-2", key: `${exercise.name}-input-group` },
+                                [
+                                  React.createElement('input', {
+                                    type: "number",
+                                    value: exerciseWeights[exercise.name] || '',
+                                    onChange: (e) => handleWeightChange(exercise.name, e.target.value),
+                                    placeholder: "Weight (kg)",
+                                    className: "flex-grow p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500",
+                                    key: `${exercise.name}-input`
+                                  }),
+                                  prevWeight && React.createElement(
+                                    'span',
+                                    { 
+                                      className: "ml-2 text-sm text-gray-500 whitespace-nowrap", 
+                                      key: `${exercise.name}-prev-weight` 
+                                    },
+                                    `Last: ${prevWeight} kg`
+                                  )
+                                ]
+                              ),
+                              
+                              // Sets checkboxes - custom for each category
+                              React.createElement(
+                                'div',
+                                { className: "flex items-center mt-2", key: `${exercise.name}-sets` },
+                                [
+                                  React.createElement('span', { className: "text-sm mr-2", key: `${exercise.name}-sets-label` }, "Sets:"),
+                                  
+                                  // Cardio - only 1 set
+                                  isCardio && React.createElement(
+                                    'label',
+                                    { 
+                                      className: "inline-flex items-center cursor-pointer",
+                                      key: `${exercise.name}-set1-label` 
+                                    },
+                                    [
+                                      React.createElement('input', {
+                                        type: "checkbox",
+                                        checked: completedSets[`${exercise.name}-set1`] || false,
+                                        onChange: () => handleSetToggle(exercise.name, 1),
+                                        className: "form-checkbox h-4 w-4 text-green-600",
+                                        key: `${exercise.name}-set1-checkbox`
+                                      }),
+                                      React.createElement('span', { className: "ml-1 text-sm" }, "Complete")
+                                    ]
+                                  ),
+                                  
+                                  // Warmup - only 2 sets
+                                  isWarmup && [
+                                    // Set 1
+                                    React.createElement(
+                                      'label',
+                                      { 
+                                        className: "inline-flex items-center mr-3 cursor-pointer",
+                                        key: `${exercise.name}-set1-label` 
+                                      },
+                                      [
+                                        React.createElement('input', {
+                                          type: "checkbox",
+                                          checked: completedSets[`${exercise.name}-set1`] || false,
+                                          onChange: () => handleSetToggle(exercise.name, 1),
+                                          className: "form-checkbox h-4 w-4 text-blue-600",
+                                          key: `${exercise.name}-set1-checkbox`
+                                        }),
+                                        React.createElement('span', { className: "ml-1 text-sm" }, "1")
+                                      ]
+                                    ),
+                                    // Set 2
+                                    React.createElement(
+                                      'label',
+                                      { 
+                                        className: "inline-flex items-center cursor-pointer",
+                                        key: `${exercise.name}-set2-label` 
+                                      },
+                                      [
+                                        React.createElement('input', {
+                                          type: "checkbox",
+                                          checked: completedSets[`${exercise.name}-set2`] || false,
+                                          onChange: () => handleSetToggle(exercise.name, 2),
+                                          className: "form-checkbox h-4 w-4 text-blue-600",
+                                          key: `${exercise.name}-set2-checkbox`
+                                        }),
+                                        React.createElement('span', { className: "ml-1 text-sm" }, "2")
+                                      ]
+                                    )
+                                  ],
+                                  
+                                  // Regular exercises - 3 sets
+                                  !isCardio && !isWarmup && [
+                                    // Set 1
+                                    React.createElement(
+                                      'label',
+                                      { 
+                                        className: "inline-flex items-center mr-3 cursor-pointer",
+                                        key: `${exercise.name}-set1-label` 
+                                      },
+                                      [
+                                        React.createElement('input', {
+                                          type: "checkbox",
+                                          checked: completedSets[`${exercise.name}-set1`] || false,
+                                          onChange: () => handleSetToggle(exercise.name, 1),
+                                          className: "form-checkbox h-4 w-4 text-blue-600",
+                                          key: `${exercise.name}-set1-checkbox`
+                                        }),
+                                        React.createElement('span', { className: "ml-1 text-sm" }, "1")
+                                      ]
+                                    ),
+                                    // Set 2
+                                    React.createElement(
+                                      'label',
+                                      { 
+                                        className: "inline-flex items-center mr-3 cursor-pointer",
+                                        key: `${exercise.name}-set2-label` 
+                                      },
+                                      [
+                                        React.createElement('input', {
+                                          type: "checkbox",
+                                          checked: completedSets[`${exercise.name}-set2`] || false,
+                                          onChange: () => handleSetToggle(exercise.name, 2),
+                                          className: "form-checkbox h-4 w-4 text-blue-600",
+                                          key: `${exercise.name}-set2-checkbox`
+                                        }),
+                                        React.createElement('span', { className: "ml-1 text-sm" }, "2")
+                                      ]
+                                    ),
+                                    // Set 3
+                                    React.createElement(
+                                      'label',
+                                      { 
+                                        className: "inline-flex items-center cursor-pointer",
+                                        key: `${exercise.name}-set3-label` 
+                                      },
+                                      [
+                                        React.createElement('input', {
+                                          type: "checkbox",
+                                          checked: completedSets[`${exercise.name}-set3`] || false,
+                                          onChange: () => handleSetToggle(exercise.name, 3),
+                                          className: "form-checkbox h-4 w-4 text-blue-600",
+                                          key: `${exercise.name}-set3-checkbox`
+                                        }),
+                                        React.createElement('span', { className: "ml-1 text-sm" }, "3")
+                                      ]
+                                    )
+                                  ]
+                                ]
+                              )
+                            ]
                           )
                         ]
                       )
@@ -707,6 +853,8 @@ const WorkoutTracker = () => {
             { className: "mb-4 overflow-y-auto flex-grow", key: "detail-exercises" },
             initialWorkouts[currentWorkout].map(exercise => {
               const exerciseImage = getExerciseImage(exercise.name, currentWorkout);
+              const isCardio = exercise.category === 'Cardio';
+              const isWarmup = exercise.category === 'Warmup';
               
               return React.createElement(
                 'div',
@@ -722,7 +870,7 @@ const WorkoutTracker = () => {
                       React.createElement('img', {
                         src: exerciseImage,
                         alt: exercise.name,
-                        className: "w-full h-24 object-cover rounded border border-gray-200",
+                        className: "w-full h-auto max-h-32 object-contain rounded border border-gray-200",
                         onError: (e) => {
                           // If image fails to load, hide the image completely
                           e.target.style.display = 'none';
@@ -740,8 +888,15 @@ const WorkoutTracker = () => {
                           'div',
                           { className: "flex justify-between mb-1", key: `${exercise.name}-weight-row` },
                           [
-                            React.createElement('span', { className: "font-medium", key: "name" }, exercise.name),
                             React.createElement(
+                              'span', 
+                              { 
+                                className: `font-medium ${isCardio ? 'text-green-700' : isWarmup ? 'text-blue-700' : ''}`, 
+                                key: "name" 
+                              }, 
+                              exercise.name
+                            ),
+                            !isCardio && !isWarmup && React.createElement(
                               'span',
                               { className: "text-blue-700 font-medium", key: "weight" },
                               exerciseWeights[exercise.name] ? `${exerciseWeights[exercise.name]} kg` : 'Not recorded'
@@ -775,129 +930,183 @@ const WorkoutTracker = () => {
               React.createElement(
                 'h2',
                 { className: "text-xl font-semibold mb-2", key: "progress-title" },
-                "Exercise Progress Charts"
+                "Your Exercise Progress"
               ),
               React.createElement(
                 'p',
                 { className: "text-sm text-gray-500 mb-4", key: "progress-note" },
-                "Select an exercise to view your weight progression over time"
+                "Showing progress for exercises with at least 2 recorded weights"
               )
             ]
           ),
           React.createElement(
             'div',
-            { className: "mb-4", key: "exercise-selector" },
-            [
-              React.createElement(
-                'select',
-                {
-                  key: "exercise-select",
-                  value: selectedExercise,
-                  onChange: (e) => {
-                    setSelectedExercise(e.target.value);
+            { className: "mb-4 overflow-y-auto", key: "progress-charts" },
+            (function() {
+              // Get all exercises with enough data for a chart
+              const exercisesWithData = getAllExercises().filter(exercise => {
+                // Skip cardio and warmup exercises as we don't track weights for them
+                const exerciseCategory = (() => {
+                  for (const workoutType in initialWorkouts) {
+                    const found = initialWorkouts[workoutType].find(ex => ex.name === exercise);
+                    if (found) return found.category;
+                  }
+                  return null;
+                })();
+                
+                if (exerciseCategory === 'Cardio' || exerciseCategory === 'Warmup') {
+                  return false;
+                }
+                
+                const data = getExerciseProgressData(exercise);
+                return data.length >= 2; // Need at least 2 data points for a chart
+              });
+              
+              if (exercisesWithData.length === 0) {
+                return React.createElement(
+                  'div',
+                  { className: "text-center py-8 text-gray-500 bg-white rounded-lg shadow" },
+                  "No exercises with enough data yet. Track more workouts to see your progress!"
+                );
+              }
+              
+              // Get workout type for each exercise (for image)
+              const getExerciseWorkoutType = (exerciseName) => {
+                for (const [workoutType, exercises] of Object.entries(initialWorkouts)) {
+                  if (exercises.find(ex => ex.name === exerciseName)) {
+                    return workoutType;
+                  }
+                }
+                return Object.keys(initialWorkouts)[0]; // Fallback
+              };
+              
+              // Create a progress card for each exercise
+              return exercisesWithData.map(exercise => {
+                const progressData = getExerciseProgressData(exercise);
+                const workoutType = getExerciseWorkoutType(exercise);
+                const exerciseImage = getExerciseImage(exercise, workoutType);
+                
+                // Get stats
+                const maxWeight = Math.max(...progressData.map(d => d.weight));
+                const currentWeight = progressData[progressData.length - 1].weight;
+                const firstWeight = progressData[0].weight;
+                const improvement = currentWeight - firstWeight;
+                const improvementPct = ((improvement / firstWeight) * 100).toFixed(1);
+                
+                // Create a unique canvas ID for each chart
+                const canvasId = `chart-${exercise.replace(/\s+/g, '-').toLowerCase()}`;
+                
+                return React.createElement(
+                  'div',
+                  { 
+                    className: "mb-6 p-4 bg-white rounded-lg shadow",
+                    key: `progress-${exercise}`
                   },
-                  className: "w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                },
-                [
-                  React.createElement('option', { key: 'default', value: '' }, 'Select an exercise...'),
-                  ...getAllExercises().map(exercise => 
-                    React.createElement('option', { key: exercise, value: exercise }, exercise)
-                  )
-                ]
-              )
-            ]
-          ),
-          selectedExercise && React.createElement(
-            'div',
-            { className: "mb-4 p-4 bg-white rounded-lg shadow", key: "chart-container" },
-            [
-              React.createElement(
-                'h3',
-                { className: "text-lg font-medium mb-2", key: "exercise-name" },
-                selectedExercise
-              ),
-              React.createElement(
-                'div',
-                { className: "stats-summary mb-4", key: "stats-summary" },
-                () => {
-                  const progressData = getExerciseProgressData(selectedExercise);
-                  if (progressData.length > 0) {
-                    const maxWeight = Math.max(...progressData.map(d => d.weight));
-                    const minWeight = Math.min(...progressData.map(d => d.weight));
-                    const currentWeight = progressData[progressData.length - 1].weight;
-                    const firstWeight = progressData[0].weight;
-                    const improvement = currentWeight - firstWeight;
-                    const improvementPct = ((improvement / firstWeight) * 100).toFixed(1);
-                    
-                    return React.createElement(
+                  [
+                    // Exercise title and stats
+                    React.createElement(
                       'div',
-                      { className: "grid grid-cols-2 gap-2 text-sm" },
+                      { className: "flex items-center mb-2", key: `header-${exercise}` },
                       [
-                        React.createElement(
+                        // Exercise image (if available)
+                        exerciseImage && React.createElement(
                           'div',
-                          { className: "p-2 bg-blue-50 rounded", key: "current" },
-                          [
-                            React.createElement('span', { className: "block text-xs text-gray-500" }, "Current"),
-                            React.createElement('span', { className: "font-medium" }, `${currentWeight} kg`)
-                          ]
+                          { className: "w-12 h-12 mr-3 flex-shrink-0", key: `img-container-${exercise}` },
+                          React.createElement('img', {
+                            src: exerciseImage,
+                            alt: exercise,
+                            className: "w-full h-auto max-h-12 object-contain rounded",
+                            onError: (e) => {
+                              e.target.style.display = 'none';
+                              e.target.parentNode.style.display = 'none';
+                            },
+                            key: `img-${exercise}`
+                          })
                         ),
+                        // Exercise name
                         React.createElement(
-                          'div',
-                          { className: "p-2 bg-green-50 rounded", key: "improvement" },
-                          [
-                            React.createElement('span', { className: "block text-xs text-gray-500" }, "Improvement"),
-                            React.createElement(
-                              'span', 
-                              { className: improvement >= 0 ? "font-medium text-green-600" : "font-medium text-red-600" },
-                              `${improvement > 0 ? '+' : ''}${improvement} kg (${improvementPct}%)`
-                            )
-                          ]
+                          'h3',
+                          { className: "text-lg font-medium flex-grow", key: `name-${exercise}` },
+                          exercise
                         ),
+                        // Current weight badge
                         React.createElement(
                           'div',
-                          { className: "p-2 bg-blue-50 rounded", key: "max" },
-                          [
-                            React.createElement('span', { className: "block text-xs text-gray-500" }, "Max Weight"),
-                            React.createElement('span', { className: "font-medium" }, `${maxWeight} kg`)
-                          ]
-                        ),
-                        React.createElement(
-                          'div',
-                          { className: "p-2 bg-blue-50 rounded", key: "sessions" },
-                          [
-                            React.createElement('span', { className: "block text-xs text-gray-500" }, "Sessions"),
-                            React.createElement('span', { className: "font-medium" }, progressData.length)
-                          ]
+                          { className: "text-sm px-2 py-1 bg-blue-100 text-blue-800 rounded", key: `weight-${exercise}` },
+                          `${currentWeight} kg`
                         )
                       ]
-                    );
-                  }
-                  return React.createElement('p', { className: "text-gray-500" }, "No data available");
-                }
-              ),
-              React.createElement(
-                'div',
-                { className: "relative h-64", key: "chart" },
-                React.createElement('canvas', {
-                  ref: (el) => {
-                    if (el && selectedExercise) {
-                      setTimeout(() => createChart(el, selectedExercise), 0);
-                    }
-                  },
-                  className: "w-full h-full"
-                })
-              ),
-              getExerciseProgressData(selectedExercise).length < 2 && React.createElement(
-                'p',
-                { className: "text-center text-gray-500 mt-2", key: "not-enough-data" },
-                "Not enough data to display a chart. Add more workouts."
-              )
-            ]
-          ),
-          !selectedExercise && React.createElement(
-            'div',
-            { className: "text-center py-8 text-gray-500 bg-white rounded-lg shadow", key: "no-selection" },
-            "Select an exercise to view progress charts"
+                    ),
+                    
+                    // Improvement stat
+                    React.createElement(
+                      'div',
+                      { 
+                        className: improvement >= 0 ? "mb-3 text-sm text-green-600" : "mb-3 text-sm text-red-600",
+                        key: `improvement-${exercise}`
+                      },
+                      `Progress: ${improvement > 0 ? '+' : ''}${improvement} kg (${improvementPct}%) in ${progressData.length} sessions`
+                    ),
+                    
+                    // Chart
+                    React.createElement(
+                      'div',
+                      { className: "relative h-40", key: `chart-container-${exercise}` },
+                      React.createElement('canvas', {
+                        id: canvasId,
+                        ref: (el) => {
+                          if (el) {
+                            // Each chart needs a unique instance
+                            setTimeout(() => {
+                              const ctx = el.getContext('2d');
+                              const labels = progressData.map(item => item.date);
+                              const weights = progressData.map(item => item.weight);
+                              
+                              if (window[`chart_${canvasId}`]) {
+                                window[`chart_${canvasId}`].destroy();
+                              }
+                              
+                              window[`chart_${canvasId}`] = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                  labels: labels,
+                                  datasets: [{
+                                    label: `Weight (kg)`,
+                                    data: weights,
+                                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                                    borderColor: 'rgba(59, 130, 246, 1)',
+                                    borderWidth: 2,
+                                    tension: 0.1,
+                                    fill: true,
+                                    pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                                    pointRadius: 4
+                                  }]
+                                },
+                                options: {
+                                  responsive: true,
+                                  maintainAspectRatio: false,
+                                  scales: {
+                                    y: {
+                                      beginAtZero: false
+                                    }
+                                  },
+                                  plugins: {
+                                    legend: {
+                                      display: false
+                                    }
+                                  }
+                                }
+                              });
+                            }, 0);
+                          }
+                        },
+                        className: "w-full h-full"
+                      })
+                    )
+                  ]
+                );
+              });
+            })()
           )
         ]
       )
