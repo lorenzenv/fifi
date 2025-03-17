@@ -6,41 +6,41 @@ const WorkoutTracker = () => {
   // Initial workout plans with exercise data including image paths
   const initialWorkouts = {
     'Push Workout': [
-      { name: 'Treadmill', image: './images/treadmill.jpg', category: 'Cardio' },
-      { name: 'Arm Circles', image: './images/arm-circles.jpg', category: 'Warmup' },
-      { name: 'World Greatest Stretch', image: './images/world-greatest-stretch.jpg', category: 'Mobility' },
-      { name: '90/90', image: './images/90-90.jpg', category: 'Mobility' },
-      { name: 'Cable Flys', image: './images/cable-flys.jpg', category: 'Chest' },
-      { name: 'Cable Triceps Pulldowns', image: './images/cable-triceps-pulldowns.jpg', category: 'Triceps' },
-      { name: 'Dumbbell Lateral Raises Sitting', image: './images/dumbbell-lateral-raises.jpg', category: 'Shoulders' },
-      { name: 'Machine Hack Squats', image: './images/machine-hack-squats.jpg', category: 'Legs' },
-      { name: 'Machine Leg Extension', image: './images/machine-leg-extension.jpg', category: 'Legs' },
-      { name: 'Barbell Bench Press', image: './images/barbell-bench-press.jpg', category: 'Chest' }
+      { name: 'Treadmill', image: './images/treadmill.png', category: 'Cardio' },
+      { name: 'Arm Circles', image: './images/arm-circles.png', category: 'Warmup' },
+      { name: 'World Greatest Stretch', image: './images/world-greatest-stretch.png', category: 'Mobility' },
+      { name: '90/90', image: './images/90-90.png', category: 'Mobility' },
+      { name: 'Cable Flys', image: './images/cable-flys.gif', category: 'Chest' },
+      { name: 'Cable Triceps Pulldowns', image: './images/cable-triceps-pulldowns.png', category: 'Triceps' },
+      { name: 'Dumbbell Lateral Raises Sitting', image: './images/dumbbell-lateral-raises.png', category: 'Shoulders' },
+      { name: 'Machine Hack Squats', image: './images/machine-hack-squats.png', category: 'Legs' },
+      { name: 'Machine Leg Extension', image: './images/machine-leg-extension.png', category: 'Legs' },
+      { name: 'Barbell Bench Press', image: './images/barbell-bench-press.png', category: 'Chest' }
     ],
     'Pull A': [
-      { name: 'Treadmill', image: './images/treadmill.jpg', category: 'Cardio' },
-      { name: 'Arm Circles', image: './images/arm-circles.jpg', category: 'Warmup' },
-      { name: 'Quadruped T Spine Mobilization', image: './images/quadruped-t-spine.jpg', category: 'Mobility' },
-      { name: 'Ankle Mobilization', image: './images/ankle-mobilization.jpg', category: 'Mobility' },
-      { name: 'Resistance Band Pull-ups', image: './images/resistance-band-pullups.jpg', category: 'Back' },
-      { name: 'Cable Row Wide Sitting', image: './images/cable-row-wide.jpg', category: 'Back' },
-      { name: 'Machine Leg Curls', image: './images/machine-leg-curls.jpg', category: 'Legs' },
-      { name: 'Dumbbell Bicep Curls Incline', image: './images/dumbbell-bicep-curls.jpg', category: 'Biceps' },
-      { name: 'Machine Hip Adduction', image: './images/machine-hip-adduction.jpg', category: 'Legs' },
-      { name: 'Crunches', image: './images/crunches.jpg', category: 'Core' }
+      { name: 'Treadmill', image: './images/treadmill.png', category: 'Cardio' },
+      { name: 'Arm Circles', image: './images/arm-circles.png', category: 'Warmup' },
+      { name: 'Quadruped T Spine Mobilization', image: './images/quadruped-t-spine.png', category: 'Mobility' },
+      { name: 'Ankle Mobilization', image: './images/ankle-mobilization.png', category: 'Mobility' },
+      { name: 'Resistance Band Pull-ups', image: './images/resistance-band-pullups.png', category: 'Back' },
+      { name: 'Cable Row Wide Sitting', image: './images/cable-row-wide.png', category: 'Back' },
+      { name: 'Machine Leg Curls', image: './images/machine-leg-curls.png', category: 'Legs' },
+      { name: 'Dumbbell Bicep Curls Incline', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
+      { name: 'Machine Hip Adduction', image: './images/machine-hip-adduction.png', category: 'Legs' },
+      { name: 'Crunches', image: './images/crunches.png', category: 'Core' }
     ],
     'Pull B': [
-      { name: 'Treadmill', image: './images/treadmill.jpg', category: 'Cardio' },
-      { name: 'Arm Circles', image: './images/arm-circles.jpg', category: 'Warmup' },
-      { name: 'Quadruped T Spine Mobilization', image: './images/quadruped-t-spine.jpg', category: 'Mobility' },
-      { name: 'Ankle Mobilization', image: './images/ankle-mobilization.jpg', category: 'Mobility' },
-      { name: 'Resistance Band Pull-ups', image: './images/resistance-band-pullups.jpg', category: 'Back' },
-      { name: 'HumanSport Lat Pulley', image: './images/lat-pulley.jpg', category: 'Back' },
-      { name: 'Cable Face Pulls', image: './images/cable-face-pulls.jpg', category: 'Shoulders' },
-      { name: 'Dumbbell Bicep Curls Incline', image: './images/dumbbell-bicep-curls.jpg', category: 'Biceps' },
-      { name: 'Machine Leg Curls', image: './images/machine-leg-curls.jpg', category: 'Legs' },
-      { name: 'Machine Hip Adduction', image: './images/machine-hip-adduction.jpg', category: 'Legs' },
-      { name: 'T-Bar Row', image: './images/t-bar-row.jpg', category: 'Back' }
+      { name: 'Treadmill', image: './images/treadmill.png', category: 'Cardio' },
+      { name: 'Arm Circles', image: './images/arm-circles.png', category: 'Warmup' },
+      { name: 'Quadruped T Spine Mobilization', image: './images/quadruped-t-spine.png', category: 'Mobility' },
+      { name: 'Ankle Mobilization', image: './images/ankle-mobilization.png', category: 'Mobility' },
+      { name: 'Resistance Band Pull-ups', image: './images/resistance-band-pullups.png', category: 'Back' },
+      { name: 'HumanSport Lat Pulley', image: './images/lat-pulley.png', category: 'Back' },
+      { name: 'Cable Face Pulls', image: './images/cable-face-pulls.png', category: 'Shoulders' },
+      { name: 'Dumbbell Bicep Curls Incline', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
+      { name: 'Machine Leg Curls', image: './images/machine-leg-curls.png', category: 'Legs' },
+      { name: 'Machine Hip Adduction', image: './images/machine-hip-adduction.png', category: 'Legs' },
+      { name: 'T-Bar Row', image: './images/t-bar-row.png', category: 'Back' }
     ]
   };
 
@@ -846,7 +846,7 @@ const WorkoutTracker = () => {
                     );
                   }
                   return React.createElement('p', { className: "text-gray-500" }, "No data available");
-                }()
+                }
               ),
               React.createElement(
                 'div',
