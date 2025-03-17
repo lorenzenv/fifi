@@ -26,7 +26,7 @@ const WorkoutTracker = () => {
       { name: 'Kabelzug-Rudern breit im Sitzen', image: './images/cable-row-wide.png', category: 'Back' },
       { name: 'Maschinen-Beincurls', image: './images/machine-leg-curls.png', category: 'Legs' },
       { name: 'Kurzhantel-Bizepscurls am Schrägbrett', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
-      { name: 'Maschinen-Hüftadduktion', image: './images/machine-hip-adduction.png', category: 'Legs' },
+      { name: 'Maschinen-Adduktoren (Kenos Lieblingsübung)', image: './images/machine-hip-adduction.png', category: 'Legs' },
       { name: 'Crunches', image: './images/crunches.png', category: 'Core' }
     ],
     'Pull B': [
@@ -34,13 +34,13 @@ const WorkoutTracker = () => {
       { name: 'Armkreise', image: './images/arm-circles.png', category: 'Warmup' },
       { name: 'Katze Buckel / Rund Rücken', image: './images/quadruped-t-spine.png', category: 'Warmup' },
       { name: 'Knöchel-Mobilisation', image: './images/ankle-mobilization.png', category: 'Warmup' },
+      { name: 'T-Bar-Rudern', image: './images/t-bar-row.png', category: 'Back' },
       { name: 'Klimmzüge mit Widerstandsband', image: './images/resistance-band-pullups.png', category: 'Back' },
       { name: 'HumanSport Latziehen', image: './images/lat-pulley.png', category: 'Back' },
       { name: 'Kabelzug-Facepulls', image: './images/cable-face-pulls.png', category: 'Shoulders' },
       { name: 'Kurzhantel-Bizepscurls am Schrägbrett', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
       { name: 'Maschinen-Beincurls (Beine nach unten drücken)', image: './images/machine-leg-curls.png', category: 'Legs' },
       { name: 'Maschinen-Adduktoren (Kenos Lieblingsübung)', image: './images/machine-hip-adduction.png', category: 'Legs' },
-      { name: 'T-Bar-Rudern', image: './images/t-bar-row.png', category: 'Back' }
     ]
   };
 
