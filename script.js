@@ -329,33 +329,32 @@ const WorkoutTracker = () => {
   // Render component with JSX
   return React.createElement(
     'div',
-    { className: "flex flex-col h-screen max-w-md mx-auto p-4 bg-gray-50" },
+    { className: "flex flex-col h-screen max-w-md mx-auto p-4 bg-gradient-to-b from-slate-50 to-slate-100" },
     [
       // Title
       React.createElement(
-        'h1',
-        { className: "text-2xl font-bold mb-2 text-center text-blue-800", key: "title" },
-        "Workout Progress Tracker"
-      ),
-      
-      // Storage Info
-      React.createElement(
-        'p',
-        { className: "text-xs text-center text-gray-500 mb-3", key: "storage-info" },
-        "Data stored locally on this device"
+        'div',
+        { className: "text-center mb-5 animate__animated animate__fadeIn", key: "header" },
+        [
+          React.createElement(
+            'p',
+            { className: "text-xs text-gray-400 mt-1", key: "storage-info" },
+            "Data stored securely on this device"
+          )
+        ]
       ),
       
       // Status Message
       statusMessage && React.createElement(
         'div',
-        { className: "mb-2 p-2 bg-blue-100 text-blue-800 rounded text-center", key: "status" },
+        { className: "mb-4 p-3 bg-indigo-100 text-indigo-700 rounded-lg shadow-sm text-center animate__animated animate__fadeIn", key: "status" },
         statusMessage
       ),
       
       // Mode Toggle
       React.createElement(
         'div',
-        { className: "flex mb-4 justify-center", key: "mode-toggle" },
+        { className: "flex mb-6 justify-center", key: "mode-toggle" },
         [
           React.createElement(
             'button',
@@ -366,9 +365,9 @@ const WorkoutTracker = () => {
                 setExerciseWeights({});
                 setCompletedSets({});
               },
-              className: `px-3 py-2 rounded-l-lg ${viewMode === 'current' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`
+              className: `px-4 py-3 rounded-l-xl shadow-sm font-medium btn ${viewMode === 'current' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`
             },
-            "Track Workout"
+            "Track"
           ),
           React.createElement(
             'button',
@@ -378,7 +377,7 @@ const WorkoutTracker = () => {
                 setViewMode('history');
                 setSelectedDate('');
               },
-              className: `px-3 py-2 ${viewMode === 'history' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`
+              className: `px-4 py-3 shadow-sm font-medium btn ${viewMode === 'history' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`
             },
             "History"
           ),
@@ -390,9 +389,9 @@ const WorkoutTracker = () => {
                 setViewMode('progress');
                 getAllExercises();
               },
-              className: `px-3 py-2 rounded-r-lg ${viewMode === 'progress' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`
+              className: `px-4 py-3 rounded-r-xl shadow-sm font-medium btn ${viewMode === 'progress' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`
             },
-            "Progress Charts"
+            "Progress"
           )
         ]
       ),
@@ -409,8 +408,8 @@ const WorkoutTracker = () => {
             [
               React.createElement(
                 'label',
-                { className: "block mb-2 font-medium", key: "workout-label" },
-                "Workout Type:"
+                { className: "block mb-2 font-medium text-indigo-700 pl-1", key: "workout-label" },
+                "Select Workout Type"
               ),
               React.createElement(
                 'select',
@@ -421,7 +420,7 @@ const WorkoutTracker = () => {
                     setCurrentWorkout(e.target.value);
                     setExerciseWeights({});
                   },
-                  className: "w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className: "w-full p-3 border border-gray-300 bg-white rounded-xl text-gray-700 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 },
                 Object.keys(initialWorkouts).map(workout => 
                   React.createElement('option', { key: workout, value: workout }, workout)
@@ -433,11 +432,11 @@ const WorkoutTracker = () => {
           // Exercise Weight Inputs
           React.createElement(
             'div',
-            { className: "mb-4 overflow-y-auto flex-grow", key: "exercise-inputs" },
+            { className: "mb-4 overflow-y-auto flex-grow custom-scrollbar", key: "exercise-inputs" },
             [
               React.createElement(
                 'h2',
-                { className: "text-xl font-semibold mb-2", key: "exercises-title" },
+                { className: "text-xl font-semibold mb-4 text-indigo-800 pl-1", key: "exercises-title" },
                 `${currentWorkout} Exercises`
               ),
               ...initialWorkouts[currentWorkout].map(exercise => {
@@ -450,7 +449,7 @@ const WorkoutTracker = () => {
                   'div',
                   { 
                     key: exercise.name, 
-                    className: "mb-4 p-3 bg-white rounded-lg shadow"
+                    className: "mb-4 p-4 bg-white rounded-xl shadow card fade-in"
                   },
                   React.createElement(
                     'div',
@@ -464,14 +463,14 @@ const WorkoutTracker = () => {
                           React.createElement(
                             'label',
                             { 
-                              className: `block font-medium text-lg ${isCardio ? 'text-green-700' : isWarmup ? 'text-blue-700' : ''}`, 
+                              className: `block font-semibold text-lg ${isCardio ? 'text-green-700' : isWarmup ? 'text-indigo-600' : 'text-gray-800'}`, 
                               key: `${exercise.name}-label` 
                             },
                             exercise.name
                           ),
                           React.createElement(
                             'span',
-                            { className: "text-xs text-gray-500", key: `${exercise.name}-category` },
+                            { className: `text-xs ${isCardio ? 'bg-green-100 text-green-800' : isWarmup ? 'bg-indigo-100 text-indigo-800' : 'bg-gray-100 text-gray-700'} px-2 py-1 rounded-md inline-block mt-1`, key: `${exercise.name}-category` },
                             exercise.category
                           )
                         ]
@@ -516,13 +515,13 @@ const WorkoutTracker = () => {
                                     value: exerciseWeights[exercise.name] || '',
                                     onChange: (e) => handleWeightChange(exercise.name, e.target.value),
                                     placeholder: "Weight (kg)",
-                                    className: "flex-grow p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500",
+                                    className: "flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500",
                                     key: `${exercise.name}-input`
                                   }),
                                   prevWeight && React.createElement(
                                     'span',
                                     { 
-                                      className: "ml-2 text-sm text-gray-500 whitespace-nowrap", 
+                                      className: "ml-2 text-sm font-medium text-indigo-600 whitespace-nowrap bg-indigo-50 px-2 py-1 rounded", 
                                       key: `${exercise.name}-prev-weight` 
                                     },
                                     `Last: ${prevWeight} kg`
@@ -535,7 +534,7 @@ const WorkoutTracker = () => {
                                 'div',
                                 { className: "flex items-center mt-2", key: `${exercise.name}-sets` },
                                 [
-                                  React.createElement('span', { className: "text-sm mr-2", key: `${exercise.name}-sets-label` }, "Sets:"),
+                                  React.createElement('span', { className: "text-sm font-medium text-gray-700 mr-2", key: `${exercise.name}-sets-label` }, "Sets:"),
                                   
                                   // Cardio - only 1 set
                                   isCardio && React.createElement(
@@ -549,7 +548,7 @@ const WorkoutTracker = () => {
                                         type: "checkbox",
                                         checked: completedSets[`${exercise.name}-set1`] || false,
                                         onChange: () => handleSetToggle(exercise.name, 1),
-                                        className: "form-checkbox h-4 w-4 text-green-600",
+                                        className: "form-checkbox h-5 w-5 text-green-600 rounded-md",
                                         key: `${exercise.name}-set1-checkbox`
                                       }),
                                       React.createElement('span', { className: "ml-1 text-sm" }, "Complete")
@@ -671,7 +670,7 @@ const WorkoutTracker = () => {
             'button',
             {
               onClick: saveWorkout,
-              className: "w-full py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition duration-200",
+              className: "w-full py-4 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-bold rounded-xl shadow-md hover:translate-y-[-2px] transition-all duration-200 btn",
               key: "save-button"
             },
             "Save Workout"
@@ -686,19 +685,19 @@ const WorkoutTracker = () => {
         [
           React.createElement(
             'h2',
-            { className: "text-xl font-semibold mb-2", key: "history-title" },
+            { className: "text-xl font-semibold mb-4 text-indigo-800 pl-1", key: "history-title" },
             "Workout History"
           ),
           React.createElement(
             'div',
-            { className: "mb-4 overflow-y-auto flex-grow", key: "history-list" },
+            { className: "mb-4 overflow-y-auto flex-grow custom-scrollbar", key: "history-list" },
             getHistoryDates().length > 0 
               ? getHistoryDates().map(date => 
                   React.createElement(
                     'div',
                     {
                       key: date,
-                      className: "mb-3 p-3 bg-white rounded-lg shadow cursor-pointer hover:bg-gray-100",
+                      className: "mb-3 p-4 bg-white rounded-xl shadow card cursor-pointer hover:bg-gray-50 transition-all duration-200",
                       onClick: () => {
                         setSelectedDate(date);
                         setViewMode('date');
@@ -708,11 +707,11 @@ const WorkoutTracker = () => {
                       'div',
                       { className: "flex justify-between items-center" },
                       [
-                        React.createElement('span', { className: "font-medium", key: "date-text" }, date),
+                        React.createElement('span', { className: "font-medium text-indigo-700", key: "date-text" }, date),
                         React.createElement(
                           'span', 
-                          { className: "text-sm text-gray-500", key: "workouts-count" },
-                          `${getWorkoutsForDate(date).length} workout(s)`
+                          { className: "text-sm bg-indigo-50 text-indigo-700 px-2 py-1 rounded-lg", key: "workouts-count" },
+                          `${getWorkoutsForDate(date).length} workout${getWorkoutsForDate(date).length !== 1 ? 's' : ''}`
                         )
                       ]
                     )
@@ -720,8 +719,11 @@ const WorkoutTracker = () => {
                 )
               : React.createElement(
                   'div',
-                  { className: "text-center py-8 text-gray-500", key: "no-history" },
-                  "No workout history yet. Start tracking your workouts!"
+                  { className: "text-center py-12 px-4 text-gray-500 bg-white rounded-xl shadow card", key: "no-history" },
+                  [
+                    React.createElement('p', { className: "text-lg text-gray-700 mb-2", key: "empty-title" }, "No workout history yet"),
+                    React.createElement('p', { className: "text-sm text-gray-500", key: "empty-subtitle" }, "Track your first workout to start building your history")
+                  ]
                 )
           )
         ]
@@ -929,13 +931,13 @@ const WorkoutTracker = () => {
             [
               React.createElement(
                 'h2',
-                { className: "text-xl font-semibold mb-2", key: "progress-title" },
-                "Your Exercise Progress"
+                { className: "text-xl font-semibold mb-2 text-indigo-800 pl-1", key: "progress-title" },
+                "Exercise Progress"
               ),
               React.createElement(
                 'p',
-                { className: "text-sm text-gray-500 mb-4", key: "progress-note" },
-                "Showing progress for exercises with at least 2 recorded weights"
+                { className: "text-sm text-gray-600 mb-4 pl-1", key: "progress-note" },
+                "Track your strength gains over time"
               )
             ]
           ),
@@ -1073,7 +1075,7 @@ const WorkoutTracker = () => {
                                   datasets: [{
                                     label: `Weight (kg)`,
                                     data: weights,
-                                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                                    backgroundColor: '#3b82f6',
                                     borderColor: 'rgba(59, 130, 246, 1)',
                                     borderWidth: 2,
                                     tension: 0.1,
