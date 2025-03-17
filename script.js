@@ -48,8 +48,9 @@ const WorkoutTracker = () => {
   const [currentWorkout, setCurrentWorkout] = useState('Push Workout');
   const [workoutHistory, setWorkoutHistory] = useState({});
   const [exerciseWeights, setExerciseWeights] = useState({});
-  const [viewMode, setViewMode] = useState('current'); // 'current' or 'history'
+  const [viewMode, setViewMode] = useState('current'); // 'current', 'history', 'progress'
   const [selectedDate, setSelectedDate] = useState('');
+  const [selectedExercise, setSelectedExercise] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
 
   // Load data from localStorage on initial render
@@ -158,10 +159,11 @@ const WorkoutTracker = () => {
   };
 
   // Get previous weight for an exercise (for display during current workout)
+  // Now shared across all workout types that use the same exercise
   const getPreviousWeight = (exerciseName) => {
-    // Find the most recent workout of the same type that has a weight for this exercise
+    // Find the most recent workout that has a weight for this exercise, regardless of workout type
     const relevantWorkouts = Object.values(workoutHistory)
-      .filter(workout => workout.type === currentWorkout && workout.exercises[exerciseName])
+      .filter(workout => workout.exercises[exerciseName])
       .sort((a, b) => b.timestamp - a.timestamp); // Sort by timestamp, newest first
     
     if (relevantWorkouts.length > 0 && relevantWorkouts[0].exercises[exerciseName]) {
@@ -173,7 +175,100 @@ const WorkoutTracker = () => {
   // Get the image for an exercise
   const getExerciseImage = (exerciseName, workoutType) => {
     const exercise = initialWorkouts[workoutType].find(ex => ex.name === exerciseName);
-    return exercise ? exercise.image : './images/default-exercise.jpg';
+    return exercise && exercise.image ? exercise.image : null;
+  };
+  
+  // Get all unique exercises from all workout types
+  const getAllExercises = () => {
+    const allExercises = new Set();
+    Object.values(initialWorkouts).forEach(exercises => {
+      exercises.forEach(exercise => {
+        allExercises.add(exercise.name);
+      });
+    });
+    return Array.from(allExercises).sort();
+  };
+  
+  // Get progress data for a specific exercise
+  const getExerciseProgressData = (exerciseName) => {
+    // Find all workouts that have the exercise
+    const exerciseData = Object.values(workoutHistory)
+      .filter(workout => workout.exercises[exerciseName])
+      .map(workout => ({
+        date: workout.date,
+        weight: parseFloat(workout.exercises[exerciseName]),
+        timestamp: workout.timestamp
+      }))
+      .sort((a, b) => a.timestamp - b.timestamp); // Sort by timestamp, oldest first
+      
+    return exerciseData;
+  };
+  
+  // Create a chart for exercise progress
+  const createChart = (canvasRef, exerciseName) => {
+    if (!canvasRef || !exerciseName) return null;
+    
+    const progressData = getExerciseProgressData(exerciseName);
+    
+    if (progressData.length < 2) {
+      return null; // Not enough data for a chart
+    }
+    
+    const labels = progressData.map(item => item.date);
+    const weights = progressData.map(item => item.weight);
+    
+    const ctx = canvasRef.getContext('2d');
+    
+    if (window.exerciseChart) {
+      window.exerciseChart.destroy();
+    }
+    
+    window.exerciseChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: `${exerciseName} Weight (kg)`,
+          data: weights,
+          backgroundColor: 'rgba(59, 130, 246, 0.2)',
+          borderColor: 'rgba(59, 130, 246, 1)',
+          borderWidth: 2,
+          tension: 0.1,
+          fill: true,
+          pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+          pointRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: false,
+            title: {
+              display: true,
+              text: 'Weight (kg)'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Date'
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `${context.dataset.label}: ${context.raw} kg`;
+              }
+            }
+          }
+        }
+      }
+    });
+    
+    return window.exerciseChart;
   };
 
   // Delete a workout
@@ -215,8 +310,15 @@ const WorkoutTracker = () => {
       // Title
       React.createElement(
         'h1',
-        { className: "text-2xl font-bold mb-4 text-center text-blue-800", key: "title" },
+        { className: "text-2xl font-bold mb-2 text-center text-blue-800", key: "title" },
         "Workout Progress Tracker"
+      ),
+      
+      // Storage Info
+      React.createElement(
+        'p',
+        { className: "text-xs text-center text-gray-500 mb-3", key: "storage-info" },
+        "Data stored locally on this device"
       ),
       
       // Status Message
@@ -239,7 +341,7 @@ const WorkoutTracker = () => {
                 setViewMode('current');
                 setExerciseWeights({});
               },
-              className: `px-4 py-2 rounded-l-lg ${viewMode === 'current' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`
+              className: `px-3 py-2 rounded-l-lg ${viewMode === 'current' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`
             },
             "Track Workout"
           ),
@@ -251,9 +353,21 @@ const WorkoutTracker = () => {
                 setViewMode('history');
                 setSelectedDate('');
               },
-              className: `px-4 py-2 rounded-r-lg ${viewMode === 'history' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`
+              className: `px-3 py-2 ${viewMode === 'history' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`
             },
-            "View History"
+            "History"
+          ),
+          React.createElement(
+            'button',
+            {
+              key: "progress-btn",
+              onClick: () => {
+                setViewMode('progress');
+                getAllExercises();
+              },
+              className: `px-3 py-2 rounded-r-lg ${viewMode === 'progress' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`
+            },
+            "Progress Charts"
           )
         ]
       ),
@@ -339,17 +453,13 @@ const WorkoutTracker = () => {
                         { className: "flex flex-col sm:flex-row items-center mb-2", key: `${exercise.name}-content` },
                         [
                           // Image container
-                          React.createElement(
+                          exerciseImage && React.createElement(
                             'div',
                             { className: "w-full sm:w-1/3 mb-2 sm:mb-0 sm:mr-3", key: `${exercise.name}-img-container` },
                             React.createElement('img', {
                               src: exerciseImage,
                               alt: exercise.name,
                               className: "w-full h-32 object-cover rounded border border-gray-200",
-                              onError: (e) => {
-                                e.target.onerror = null;
-                                e.target.src = './images/default-exercise.jpg';
-                              },
                               key: `${exercise.name}-img`
                             })
                           ),
@@ -585,17 +695,13 @@ const WorkoutTracker = () => {
                   'div',
                   { className: "flex flex-col sm:flex-row items-center" },
                   [
-                    React.createElement(
+                    exerciseImage && React.createElement(
                       'div',
                       { className: "w-full sm:w-1/3 mb-2 sm:mb-0 sm:mr-3", key: `${exercise.name}-img-container` },
                       React.createElement('img', {
                         src: exerciseImage,
                         alt: exercise.name,
                         className: "w-full h-24 object-cover rounded border border-gray-200",
-                        onError: (e) => {
-                          e.target.onerror = null;
-                          e.target.src = './images/default-exercise.jpg';
-                        },
                         key: `${exercise.name}-img`
                       })
                     ),
@@ -626,6 +732,145 @@ const WorkoutTracker = () => {
                 )
               );
             })
+          )
+        ]
+      ),
+
+      // Progress Charts View
+      viewMode === 'progress' && React.createElement(
+        React.Fragment,
+        { key: "progress-view" },
+        [
+          React.createElement(
+            'div',
+            { className: "mb-4", key: "progress-header" },
+            [
+              React.createElement(
+                'h2',
+                { className: "text-xl font-semibold mb-2", key: "progress-title" },
+                "Exercise Progress Charts"
+              ),
+              React.createElement(
+                'p',
+                { className: "text-sm text-gray-500 mb-4", key: "progress-note" },
+                "Select an exercise to view your weight progression over time"
+              )
+            ]
+          ),
+          React.createElement(
+            'div',
+            { className: "mb-4", key: "exercise-selector" },
+            [
+              React.createElement(
+                'select',
+                {
+                  key: "exercise-select",
+                  value: selectedExercise,
+                  onChange: (e) => {
+                    setSelectedExercise(e.target.value);
+                  },
+                  className: "w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                },
+                [
+                  React.createElement('option', { key: 'default', value: '' }, 'Select an exercise...'),
+                  ...getAllExercises().map(exercise => 
+                    React.createElement('option', { key: exercise, value: exercise }, exercise)
+                  )
+                ]
+              )
+            ]
+          ),
+          selectedExercise && React.createElement(
+            'div',
+            { className: "mb-4 p-4 bg-white rounded-lg shadow", key: "chart-container" },
+            [
+              React.createElement(
+                'h3',
+                { className: "text-lg font-medium mb-2", key: "exercise-name" },
+                selectedExercise
+              ),
+              React.createElement(
+                'div',
+                { className: "stats-summary mb-4", key: "stats-summary" },
+                () => {
+                  const progressData = getExerciseProgressData(selectedExercise);
+                  if (progressData.length > 0) {
+                    const maxWeight = Math.max(...progressData.map(d => d.weight));
+                    const minWeight = Math.min(...progressData.map(d => d.weight));
+                    const currentWeight = progressData[progressData.length - 1].weight;
+                    const firstWeight = progressData[0].weight;
+                    const improvement = currentWeight - firstWeight;
+                    const improvementPct = ((improvement / firstWeight) * 100).toFixed(1);
+                    
+                    return React.createElement(
+                      'div',
+                      { className: "grid grid-cols-2 gap-2 text-sm" },
+                      [
+                        React.createElement(
+                          'div',
+                          { className: "p-2 bg-blue-50 rounded", key: "current" },
+                          [
+                            React.createElement('span', { className: "block text-xs text-gray-500" }, "Current"),
+                            React.createElement('span', { className: "font-medium" }, `${currentWeight} kg`)
+                          ]
+                        ),
+                        React.createElement(
+                          'div',
+                          { className: "p-2 bg-green-50 rounded", key: "improvement" },
+                          [
+                            React.createElement('span', { className: "block text-xs text-gray-500" }, "Improvement"),
+                            React.createElement(
+                              'span', 
+                              { className: improvement >= 0 ? "font-medium text-green-600" : "font-medium text-red-600" },
+                              `${improvement > 0 ? '+' : ''}${improvement} kg (${improvementPct}%)`
+                            )
+                          ]
+                        ),
+                        React.createElement(
+                          'div',
+                          { className: "p-2 bg-blue-50 rounded", key: "max" },
+                          [
+                            React.createElement('span', { className: "block text-xs text-gray-500" }, "Max Weight"),
+                            React.createElement('span', { className: "font-medium" }, `${maxWeight} kg`)
+                          ]
+                        ),
+                        React.createElement(
+                          'div',
+                          { className: "p-2 bg-blue-50 rounded", key: "sessions" },
+                          [
+                            React.createElement('span', { className: "block text-xs text-gray-500" }, "Sessions"),
+                            React.createElement('span', { className: "font-medium" }, progressData.length)
+                          ]
+                        )
+                      ]
+                    );
+                  }
+                  return React.createElement('p', { className: "text-gray-500" }, "No data available");
+                }()
+              ),
+              React.createElement(
+                'div',
+                { className: "relative h-64", key: "chart" },
+                React.createElement('canvas', {
+                  ref: (el) => {
+                    if (el && selectedExercise) {
+                      setTimeout(() => createChart(el, selectedExercise), 0);
+                    }
+                  },
+                  className: "w-full h-full"
+                })
+              ),
+              getExerciseProgressData(selectedExercise).length < 2 && React.createElement(
+                'p',
+                { className: "text-center text-gray-500 mt-2", key: "not-enough-data" },
+                "Not enough data to display a chart. Add more workouts."
+              )
+            ]
+          ),
+          !selectedExercise && React.createElement(
+            'div',
+            { className: "text-center py-8 text-gray-500 bg-white rounded-lg shadow", key: "no-selection" },
+            "Select an exercise to view progress charts"
           )
         ]
       )
