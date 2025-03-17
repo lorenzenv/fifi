@@ -14,7 +14,7 @@ const WorkoutTracker = () => {
       { name: 'Kabelzug-Flys im Sitzen (anderer Raum)', image: './images/cable-flys.gif', category: 'Chest' },
       { name: 'Kabelzug-Trizepsdrücken', image: './images/cable-triceps-pulldowns.png', category: 'Triceps' },
       { name: 'Kurzhantel-Seitheben im Sitzen (flacher Sitz)', image: './images/dumbbell-lateral-raises.gif', category: 'Shoulders' },
-      { name: 'Hackenschmidt', image: './images/machine-hack-squats.png', category: 'Legs' },
+      { name: 'Hämorrhoidenschmidt', image: './images/machine-hack-squats.png', category: 'Legs' },
       { name: 'Maschinen-Beinstrecker (Beine nach unten drücken)', image: './images/machine-leg-extension.png', category: 'Legs' },
     ],
     'Pull A': [
