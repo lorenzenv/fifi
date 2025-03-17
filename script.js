@@ -12,7 +12,7 @@ const WorkoutTracker = () => {
       { name: '90/90', image: './images/90-90.png', category: 'Mobility' },
       { name: 'Cable Flys', image: './images/cable-flys.gif', category: 'Chest' },
       { name: 'Cable Triceps Pulldowns', image: './images/cable-triceps-pulldowns.png', category: 'Triceps' },
-      { name: 'Dumbbell Lateral Raises Sitting', image: './images/dumbbell-lateral-raises.png', category: 'Shoulders' },
+      { name: 'Dumbbell Lateral Raises Sitting', image: './images/dumbbell-lateral-raises.gif', category: 'Shoulders' },
       { name: 'Hammerschmitt', image: './images/machine-hack-squats.png', category: 'Legs' },
       { name: 'Machine Leg Extension (nach oben drücken)', image: './images/machine-leg-extension.png', category: 'Legs' },
       { name: 'Barbell Bench Press', image: './images/barbell-bench-press.png', category: 'Chest' }
@@ -20,27 +20,27 @@ const WorkoutTracker = () => {
     'Pull A': [
       { name: 'Treadmill', image: './images/treadmill.png', category: 'Cardio' },
       { name: 'Arm Circles', image: './images/arm-circles.png', category: 'Warmup' },
-      { name: 'Quadruped T Spine Mobilization', image: './images/quadruped-t-spine.png', category: 'Mobility' },
+      { name: 'Quadruped T Spine Mobilization (rücken hoch und runter)', image: './images/quadruped-t-spine.png', category: 'Mobility' },
       { name: 'Ankle Mobilization', image: './images/ankle-mobilization.png', category: 'Mobility' },
       { name: 'Resistance Band Pull-ups', image: './images/resistance-band-pullups.png', category: 'Back' },
       { name: 'Cable Row Wide Sitting', image: './images/cable-row-wide.png', category: 'Back' },
-      { name: 'Machine Leg Curls', image: './images/machine-leg-curls.png', category: 'Legs' },
-      { name: 'Dumbbell Bicep Curls Incline', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
-      { name: 'Machine Hip Adduction', image: './images/machine-hip-adduction.png', category: 'Legs' },
-      { name: 'Crunches', image: './images/crunches.png', category: 'Core' }
+      { name: 'Machine Leg Curls (beine nach unten drücken)', image: './images/machine-leg-curls.png', category: 'Legs' },
+      { name: 'Dumbbell Bicep Curls (bizeps mit hanteln im sitzen)', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
+      { name: 'Machine Adduktoren (kenos lieblingsübung)', image: './images/machine-hip-adduction.png', category: 'Legs' },
+      { name: 'Crunches (mit ball)', image: './images/crunches.png', category: 'Core' }
     ],
     'Pull B': [
       { name: 'Treadmill', image: './images/treadmill.png', category: 'Cardio' },
       { name: 'Arm Circles', image: './images/arm-circles.png', category: 'Warmup' },
       { name: 'Quadruped T Spine Mobilization', image: './images/quadruped-t-spine.png', category: 'Mobility' },
       { name: 'Ankle Mobilization', image: './images/ankle-mobilization.png', category: 'Mobility' },
+      { name: 'T-Bar Row', image: './images/t-bar-row.png', category: 'Back' },
       { name: 'Resistance Band Pull-ups', image: './images/resistance-band-pullups.png', category: 'Back' },
-      { name: 'HumanSport Lat Pulley', image: './images/lat-pulley.png', category: 'Back' },
+      { name: 'HumanSport Lat Pulley (in dem anderen Raum)', image: './images/lat-pulley.png', category: 'Back' },
       { name: 'Cable Face Pulls', image: './images/cable-face-pulls.png', category: 'Shoulders' },
-      { name: 'Dumbbell Bicep Curls Incline', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
-      { name: 'Machine Leg Curls', image: './images/machine-leg-curls.png', category: 'Legs' },
-      { name: 'Machine Hip Adduction', image: './images/machine-hip-adduction.png', category: 'Legs' },
-      { name: 'T-Bar Row', image: './images/t-bar-row.png', category: 'Back' }
+      { name: 'Dumbbell Bicep Curls (bizeps mit hanteln im sitzen)', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
+      { name: 'Machine Leg Curls (beine nach unten drücken)', image: './images/machine-leg-curls.png', category: 'Legs' },
+      { name: 'Machine Adduktoren (kenos lieblingsübung)', image: './images/machine-hip-adduction.png', category: 'Legs' },
     ]
   };
 
