@@ -13,8 +13,8 @@ const WorkoutTracker = () => {
       { name: 'Cable Flys', image: './images/cable-flys.gif', category: 'Chest' },
       { name: 'Cable Triceps Pulldowns', image: './images/cable-triceps-pulldowns.png', category: 'Triceps' },
       { name: 'Dumbbell Lateral Raises Sitting', image: './images/dumbbell-lateral-raises.png', category: 'Shoulders' },
-      { name: 'Machine Hack Squats', image: './images/machine-hack-squats.png', category: 'Legs' },
-      { name: 'Machine Leg Extension', image: './images/machine-leg-extension.png', category: 'Legs' },
+      { name: 'Hammerschmitt', image: './images/machine-hack-squats.png', category: 'Legs' },
+      { name: 'Machine Leg Extension (nach oben drücken)', image: './images/machine-leg-extension.png', category: 'Legs' },
       { name: 'Barbell Bench Press', image: './images/barbell-bench-press.png', category: 'Chest' }
     ],
     'Pull A': [
