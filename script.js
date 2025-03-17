@@ -174,8 +174,21 @@ const WorkoutTracker = () => {
   
   // Get the image for an exercise
   const getExerciseImage = (exerciseName, workoutType) => {
+    // First find the exercise
     const exercise = initialWorkouts[workoutType].find(ex => ex.name === exerciseName);
-    return exercise && exercise.image ? exercise.image : null;
+    
+    // Only return the image path if exercise exists and has an image property
+    if (!exercise || !exercise.image) {
+      return null;
+    }
+    
+    // Check if the image file exists (we'll use a dummy test instead of actual file check)
+    // For now, we'll assume any path that includes 'default' or doesn't start with './images/' might be problematic
+    if (exercise.image.includes('default') || !exercise.image.startsWith('./images/')) {
+      return null;
+    }
+    
+    return exercise.image;
   };
   
   // Get all unique exercises from all workout types
@@ -453,6 +466,7 @@ const WorkoutTracker = () => {
                         { className: "flex flex-col sm:flex-row items-center mb-2", key: `${exercise.name}-content` },
                         [
                           // Image container
+                          // Image container - only show if image exists and is valid
                           exerciseImage && React.createElement(
                             'div',
                             { className: "w-full sm:w-1/3 mb-2 sm:mb-0 sm:mr-3", key: `${exercise.name}-img-container` },
@@ -460,6 +474,12 @@ const WorkoutTracker = () => {
                               src: exerciseImage,
                               alt: exercise.name,
                               className: "w-full h-32 object-cover rounded border border-gray-200",
+                              onError: (e) => {
+                                // If image fails to load, hide the image completely
+                                e.target.style.display = 'none';
+                                // Also hide the parent container
+                                e.target.parentNode.style.display = 'none';
+                              },
                               key: `${exercise.name}-img`
                             })
                           ),
@@ -695,6 +715,7 @@ const WorkoutTracker = () => {
                   'div',
                   { className: "flex flex-col sm:flex-row items-center" },
                   [
+                    // Image container - only show if image exists and is valid
                     exerciseImage && React.createElement(
                       'div',
                       { className: "w-full sm:w-1/3 mb-2 sm:mb-0 sm:mr-3", key: `${exercise.name}-img-container` },
@@ -702,6 +723,12 @@ const WorkoutTracker = () => {
                         src: exerciseImage,
                         alt: exercise.name,
                         className: "w-full h-24 object-cover rounded border border-gray-200",
+                        onError: (e) => {
+                          // If image fails to load, hide the image completely
+                          e.target.style.display = 'none';
+                          // Also hide the parent container
+                          e.target.parentNode.style.display = 'none';
+                        },
                         key: `${exercise.name}-img`
                       })
                     ),
