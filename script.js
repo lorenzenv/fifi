@@ -24,7 +24,7 @@ const WorkoutTracker = () => {
       { name: 'Knöchel-Mobilisation', image: './images/ankle-mobilization.png', category: 'Warmup' },
       { name: 'Klimmzüge mit Widerstandsband', image: './images/resistance-band-pullups.png', category: 'Back' },
       { name: 'Kabelzug-Rudern breit im Sitzen', image: './images/cable-row-wide.png', category: 'Back' },
-      { name: 'Maschinen-Beincurls', image: './images/machine-leg-curls.png', category: 'Legs' },
+      { name: 'Maschinen-Beincurls (Beine nach unten drücken)', image: './images/machine-leg-curls.png', category: 'Legs' },
       { name: 'Kurzhantel-Bizepscurls am Schrägbrett', image: './images/dumbbell-bicep-curls.png', category: 'Biceps' },
       { name: 'Maschinen-Adduktoren (Kenos Lieblingsübung)', image: './images/machine-hip-adduction.png', category: 'Legs' },
       { name: 'Crunches', image: './images/crunches.png', category: 'Core' }
