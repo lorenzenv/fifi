@@ -15,7 +15,7 @@ const WorkoutTracker = () => {
       { name: 'Dumbbell Lateral Raises Sitting', image: './images/dumbbell-lateral-raises.gif', category: 'Shoulders' },
       { name: 'Hammerschmitt', image: './images/machine-hack-squats.png', category: 'Legs' },
       { name: 'Machine Leg Extension (nach oben drücken)', image: './images/machine-leg-extension.png', category: 'Legs' },
-      { name: 'Barbell Bench Press', image: './images/barbell-bench-press.png', category: 'Chest' }
+      { name: 'Bench Press', image: './images/barbell-bench-press.png', category: 'Chest' }
     ],
     'Pull A': [
       { name: 'Treadmill', image: './images/treadmill.png', category: 'Cardio' },
