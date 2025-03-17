@@ -1,6 +1,5 @@
 // Convert JSX React component to browser-compatible JavaScript
 const { useState, useEffect } = React;
-const { Camera } = lucideReact;
 
 // Main component
 const WorkoutTracker = () => {

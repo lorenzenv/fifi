@@ -3,15 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workout Tracker</title>
+  <title>FIFI FIFI</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Basic styles to ensure smooth scrolling and fixed heights */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #root {
+      height: 100%;
+    }
+    .overflow-y-auto {
+      -webkit-overflow-scrolling: touch;
+    }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
 </head>
 <body>
   <div id="root"></div>
   <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/lucide-react@0.263.1/dist/umd/lucide-react.production.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
